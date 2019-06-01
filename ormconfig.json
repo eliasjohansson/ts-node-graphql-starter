@@ -7,7 +7,7 @@
     "password": "",
     "database": "ts_node_graphql_starter",
     "synchronize": true,
-    "logging": true,
+    "logging": false,
     "entities": ["src/entity/**/*.ts"],
     "migrations": ["src/migration/**/*.ts"],
     "subscribers": ["src/subscriber/**/*.ts"],
