@@ -5,7 +5,9 @@
   "repository": "git@github.com:eliasjohansson/ts-node-graphql-starter.git",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec ts-node index.ts"
+    "start": "nodemon --exec ts-node index.ts",
+    "build": "tsc",
+    "serve": "node dist"
   },
   "devDependencies": {
     "nodemon": "^1.19.1",
