@@ -1,17 +1,22 @@
-import { createConnection, Connection } from "typeorm";
-import { User } from "./entity/User";
+import { createConnection, getConnectionOptions } from "typeorm";
+import { ApolloServer } from "apollo-server";
+import schema from "./schema";
+
+const createTypeormConnection = async () => {
+  const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
+  return createConnection({ ...connectionOptions, name: "default" });
+};
 
 const startServer = async () => {
-  const connection: Connection = await createConnection("development");
+  await createTypeormConnection();
 
-  let user = new User();
-  user.firstName = "Elias";
-  user.lastName = "Johansson";
+  const server = new ApolloServer({
+    schema
+  });
 
-  let userRepository = connection.getRepository(User);
-  userRepository.clear();
-  await userRepository.save(user);
-  console.log(await userRepository.find());
+  server.listen().then(({ url }) => {
+    console.log(`🚀 Server ready at ${url}`);
+  });
 };
 
 startServer();
