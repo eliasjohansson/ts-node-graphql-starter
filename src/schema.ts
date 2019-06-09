@@ -1,17 +1,17 @@
-import { makeExecutableSchema } from "graphql-tools";
-import * as fs from "fs";
-import * as path from "path";
-import * as glob from "glob";
+import { makeExecutableSchema, IResolvers } from 'graphql-tools';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as glob from 'glob';
 
-const typeDefsPath = path.join(__dirname, "./schema");
+const typeDefsPath = path.join(__dirname, './schema');
 const typeDefs = glob
   .sync(`${typeDefsPath}/*.graphql`)
-  .map(x => fs.readFileSync(x, { encoding: "utf8" }));
+  .map((x): string => fs.readFileSync(x, { encoding: 'utf8' }));
 
-const resolversPath = path.join(__dirname, "./resolvers");
+const resolversPath = path.join(__dirname, './resolvers');
 const resolvers = glob
   .sync(`${resolversPath}/*.ts`)
-  .map(resolver => require(resolver).resolvers);
+  .map((resolver): IResolvers => require(resolver).resolvers);
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 

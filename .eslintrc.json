@@ -17,5 +17,9 @@
       }
     }
   },
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/explicit-member-accessibility": 0,
+    "global-require": 0,
+    "import/no-dynamic-require": 0
+  }
 }
